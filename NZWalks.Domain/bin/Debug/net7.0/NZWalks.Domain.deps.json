@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v7.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v7.0": {
+      "NZWalks.Domain/1.0.0": {
+        "runtime": {
+          "NZWalks.Domain.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "NZWalks.Domain/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

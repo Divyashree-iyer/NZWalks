@@ -1,0 +1,12 @@
+D:\udemy\Asp.net core\NZWalks\NZWalks\NZWalks.Domain\bin\Debug\net7.0\NZWalks.Domain.deps.json
+D:\udemy\Asp.net core\NZWalks\NZWalks\NZWalks.Domain\bin\Debug\net7.0\NZWalks.Domain.dll
+D:\udemy\Asp.net core\NZWalks\NZWalks\NZWalks.Domain\bin\Debug\net7.0\NZWalks.Domain.pdb
+D:\udemy\Asp.net core\NZWalks\NZWalks\NZWalks.Domain\obj\Debug\net7.0\NZWalks.Domain.csproj.AssemblyReference.cache
+D:\udemy\Asp.net core\NZWalks\NZWalks\NZWalks.Domain\obj\Debug\net7.0\NZWalks.Domain.GeneratedMSBuildEditorConfig.editorconfig
+D:\udemy\Asp.net core\NZWalks\NZWalks\NZWalks.Domain\obj\Debug\net7.0\NZWalks.Domain.AssemblyInfoInputs.cache
+D:\udemy\Asp.net core\NZWalks\NZWalks\NZWalks.Domain\obj\Debug\net7.0\NZWalks.Domain.AssemblyInfo.cs
+D:\udemy\Asp.net core\NZWalks\NZWalks\NZWalks.Domain\obj\Debug\net7.0\NZWalks.Domain.csproj.CoreCompileInputs.cache
+D:\udemy\Asp.net core\NZWalks\NZWalks\NZWalks.Domain\obj\Debug\net7.0\NZWalks.Domain.dll
+D:\udemy\Asp.net core\NZWalks\NZWalks\NZWalks.Domain\obj\Debug\net7.0\refint\NZWalks.Domain.dll
+D:\udemy\Asp.net core\NZWalks\NZWalks\NZWalks.Domain\obj\Debug\net7.0\NZWalks.Domain.pdb
+D:\udemy\Asp.net core\NZWalks\NZWalks\NZWalks.Domain\obj\Debug\net7.0\ref\NZWalks.Domain.dll
