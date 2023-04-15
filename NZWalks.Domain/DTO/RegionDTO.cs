@@ -1,7 +1,6 @@
-﻿
-namespace NZWalks.Domain.Entities
+﻿namespace NZWalks.Domain.DTO
 {
-    public class Region
+    public class RegionDTO
     {
         public Guid Id { get; set; }
 
