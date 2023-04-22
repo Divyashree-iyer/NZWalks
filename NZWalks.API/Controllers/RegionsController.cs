@@ -1,7 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using NZWalks.Business.Interfaces;
 using NZWalks.Domain.DTO;
 using NZWalks.Domain.Entities;
 using NZWalks.Infrastructure.Context;
+using NZWalks.Infrastructure.Repositories.Interfaces;
 using System.Linq;
 
 namespace NZWalks.API.Controllers
@@ -11,28 +15,22 @@ namespace NZWalks.API.Controllers
     public class RegionsController : ControllerBase
     {
         private NZWalksDbContext _context;
-        public RegionsController(NZWalksDbContext nZWalksDbContext)
+        private IRegionService _regionService;
+        private IMapper _mapper;
+        public RegionsController(NZWalksDbContext nZWalksDbContext, IRegionService regionService, IMapper mapper)
         {
             _context= nZWalksDbContext;
+            _regionService= regionService;
+            _mapper = mapper;
         }
 
         //Get All Regions
         //Route - https://localhost:portnumber/api/regions
         [HttpGet]
-        public IActionResult GetAll()
+        public async Task<IActionResult> GetAll()
         {
-            var regions = _context.Regions.ToList();
-            var regionsDto = new List<RegionDTO>();
-            foreach (var region in regions)
-            {
-                regionsDto.Add(new RegionDTO()
-                { 
-                    Id= region.Id,
-                    Name = region.Name,
-                    Code= region.Code,
-                    RegionImageUrl= region.RegionImageUrl,
-                });
-            }
+            var regions = await _regionService.GetAllAsync();
+            var regionsDto = _mapper.Map<List<RegionDTO>>(regions);
             return Ok(regionsDto);
         }
 
@@ -40,45 +38,25 @@ namespace NZWalks.API.Controllers
         //Route - https://localhost:portnumber/api/regions/{id}
         [HttpGet]
         [Route("{id:Guid}")]
-        public IActionResult GetById([FromRoute] Guid id)
+        public async Task<IActionResult> GetById([FromRoute] Guid id)
         {
-            var region = _context.Regions.Find(id);
+            var region = await _regionService.GetByIdAsync(id);
             //var region = _context.Regions.FirstOrDefault(r => r.Id == id);
             if (region == null)
                 return NotFound();
 
-            var regionDto = new RegionDTO()
-            {
-                Id = region.Id,
-                Name = region.Name,
-                Code = region.Code,
-                RegionImageUrl = region.RegionImageUrl,
-            };
-
+            var regionDto = _mapper.Map<RegionDTO>(region);
             return Ok(regionDto);
         }
 
         //Post to create new Region
         // Post - https://localhost:portnumber/api/regions
         [HttpPost]
-        public IActionResult CreateRegion([FromBody] AddRegionRequestDTO addRegionRequestDTO)
+        public async Task<IActionResult> CreateRegion([FromBody] AddRegionRequestDTO addRegionRequestDTO)
         {
-            var regionDomainModel = new Region()
-            {
-                Code = addRegionRequestDTO.Code,
-                Name = addRegionRequestDTO.Name,
-                RegionImageUrl = addRegionRequestDTO.RegionImageUrl
-            };
-            _context.Regions.Add(regionDomainModel);
-            _context.SaveChanges();
-
-            var regionDto = new RegionDTO()
-            { 
-                Id = regionDomainModel.Id,
-                Name = regionDomainModel.Name,
-                Code = regionDomainModel.Code,
-                RegionImageUrl = regionDomainModel.RegionImageUrl,
-            };
+            var regionDomainModel = _mapper.Map<Region>(addRegionRequestDTO);
+            await _regionService.CreateRegionAsync(regionDomainModel);
+            var regionDto = _mapper.Map<RegionDTO>(regionDomainModel);
 
             return CreatedAtAction(nameof(GetById),new { id = regionDomainModel.Id}, regionDto);
         }
@@ -87,28 +65,18 @@ namespace NZWalks.API.Controllers
         //Route - https://localhost:portnumber/api/regions/{id}
         [HttpPut]
         [Route("{id:Guid}")]
-        public IActionResult UpdateRegion([FromRoute] Guid id, [FromBody] UpdateRegionRequestDTO updatedRegionDto)
+        public async Task<IActionResult> UpdateRegion([FromRoute] Guid id, [FromBody] UpdateRegionRequestDTO updatedRegionDto)
         {
-            var regionDomainModel = _context.Regions.Find(id);
+           
+            var regionDomainModel = _mapper.Map<Region>(updatedRegionDto);
+            regionDomainModel = await _regionService.UpdateRegionAsync(id, regionDomainModel);
 
             if (regionDomainModel == null)
             {
                 return NotFound();
             }
 
-            regionDomainModel.Code = updatedRegionDto.Code;
-            regionDomainModel.Name = updatedRegionDto.Name;
-            regionDomainModel.RegionImageUrl = updatedRegionDto.RegionImageUrl;
-
-            _context.SaveChanges();
-
-            var regionDto = new RegionDTO()
-            { 
-                Id = regionDomainModel.Id,
-                Name = regionDomainModel.Name,
-                Code = regionDomainModel.Code,
-                RegionImageUrl = regionDomainModel.RegionImageUrl
-            };
+            var regionDto = _mapper.Map<RegionDTO>(regionDomainModel);
             return Ok(regionDto);
         }
 
@@ -116,17 +84,14 @@ namespace NZWalks.API.Controllers
         //Route - https://localhost:portnumber/api/regions/{id}
         [HttpDelete]
         [Route("{id:Guid}")]
-        public IActionResult DeleteRegion([FromRoute] Guid id)
+        public async Task<IActionResult> DeleteRegion([FromRoute] Guid id)
         {
-            var regionDomainModel = _context.Regions.Find(id);
+            var regionDomainModel = await _regionService.DeleteRegionAsync(id);
 
             if (regionDomainModel == null)
             {
                 return NotFound();
             }
-
-            _context.Regions.Remove(regionDomainModel);
-            _context.SaveChanges();
 
             return Ok();
         }
