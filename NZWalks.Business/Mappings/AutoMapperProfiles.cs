@@ -1,11 +1,6 @@
 ﻿using AutoMapper;
 using NZWalks.Domain.DTO;
 using NZWalks.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NZWalks.Business.Mappings
 {
@@ -14,8 +9,12 @@ namespace NZWalks.Business.Mappings
         public AutoMapperProfiles()
         {
             CreateMap<Region, RegionDTO>().ReverseMap();
-            CreateMap<AddRegionRequestDTO, Region>();
-            CreateMap<UpdateRegionRequestDTO, Region>();
+            CreateMap<Region, AddRegionRequestDTO>().ReverseMap();
+            CreateMap<Region, UpdateRegionRequestDTO>().ReverseMap();
+            CreateMap<Walk, AddWalkRequestDTO>().ReverseMap();
+            CreateMap<Walk, WalkDTO>().ReverseMap();
+            CreateMap<Walk, UpdateWalkRequestDTO>().ReverseMap();
+            CreateMap<Difficulty, DifficultyDTO>().ReverseMap();
         }
     }
 }

@@ -1,12 +1,8 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using NZWalks.Business.Interfaces;
 using NZWalks.Domain.DTO;
 using NZWalks.Domain.Entities;
-using NZWalks.Infrastructure.Context;
-using NZWalks.Infrastructure.Repositories.Interfaces;
-using System.Linq;
 
 namespace NZWalks.API.Controllers
 {
@@ -14,12 +10,10 @@ namespace NZWalks.API.Controllers
     [ApiController]
     public class RegionsController : ControllerBase
     {
-        private NZWalksDbContext _context;
         private IRegionService _regionService;
         private IMapper _mapper;
-        public RegionsController(NZWalksDbContext nZWalksDbContext, IRegionService regionService, IMapper mapper)
+        public RegionsController(IRegionService regionService, IMapper mapper)
         {
-            _context= nZWalksDbContext;
             _regionService= regionService;
             _mapper = mapper;
         }
@@ -41,7 +35,6 @@ namespace NZWalks.API.Controllers
         public async Task<IActionResult> GetById([FromRoute] Guid id)
         {
             var region = await _regionService.GetByIdAsync(id);
-            //var region = _context.Regions.FirstOrDefault(r => r.Id == id);
             if (region == null)
                 return NotFound();
 
