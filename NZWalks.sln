@@ -7,7 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NZWalks.API", "NZWalks.API\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NZWalks.Domain", "NZWalks.Domain\NZWalks.Domain.csproj", "{2EDE0C50-3EC7-4EDE-B94B-83723DF962AA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NZWalks.Infrastructure", "NZWalks.Infrastructure\NZWalks.Infrastructure.csproj", "{23F79B71-8A7F-41BE-AEEC-6FC72EE667B5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NZWalks.Infrastructure", "NZWalks.Infrastructure\NZWalks.Infrastructure.csproj", "{23F79B71-8A7F-41BE-AEEC-6FC72EE667B5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NZWalks.Business", "NZWalks.Business\NZWalks.Business.csproj", "{1AA03D1A-1BDE-489F-8AC7-2FBE0D1B43D4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{23F79B71-8A7F-41BE-AEEC-6FC72EE667B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{23F79B71-8A7F-41BE-AEEC-6FC72EE667B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{23F79B71-8A7F-41BE-AEEC-6FC72EE667B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1AA03D1A-1BDE-489F-8AC7-2FBE0D1B43D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1AA03D1A-1BDE-489F-8AC7-2FBE0D1B43D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1AA03D1A-1BDE-489F-8AC7-2FBE0D1B43D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1AA03D1A-1BDE-489F-8AC7-2FBE0D1B43D4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
