@@ -34,7 +34,7 @@ namespace NZWalks.Infrastructure.Repositories.Implementations
         }
         public async Task<Walk?> UpdateWalkAsync(Guid id, Walk updateWalk) 
         {
-            var existingWalk = await _context.Walks.FindAsync(id);
+            var existingWalk = await _context.Walks.Include("Difficulty").Include("Region").FirstOrDefaultAsync(x => x.Id == id);
             if (existingWalk == null)
             {
                 return null;
@@ -45,6 +45,8 @@ namespace NZWalks.Infrastructure.Repositories.Implementations
             existingWalk.WalkImageUrl = updateWalk.WalkImageUrl;
             existingWalk.DifficultyId = updateWalk.DifficultyId;
             existingWalk.RegionId = updateWalk.RegionId;
+            existingWalk.Difficulty = await _context.Difficulties.FindAsync(updateWalk.DifficultyId);
+            existingWalk.Region = await _context.Regions.FindAsync(updateWalk.RegionId);
             await _context.SaveChangesAsync();
             return existingWalk;
     }
