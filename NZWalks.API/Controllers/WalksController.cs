@@ -24,11 +24,14 @@ namespace NZWalks.API.Controllers
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="filterOn"></param>
+        /// <param name="filterQuery"></param>
         /// <returns></returns>
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAll([FromQuery] string? filterOn, [FromQuery] string? filterQuery,
+            [FromQuery] string? sortBy, [FromQuery] bool? isAscending, [FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 1000)
         {
-            var walks = await _walkService.GetAllAsync();
+            var walks = await _walkService.GetAllAsync(filterOn, filterQuery, sortBy, isAscending ?? true, pageNumber, pageSize);
             var walksDto = _mapper.Map<List<WalkDTO>>(walks);
             return Ok(walksDto);
         }
