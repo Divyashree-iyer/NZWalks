@@ -17,9 +17,12 @@ namespace NZWalks.Business.Implementations
         {
             _walkRepository = walkRepository;   
         }
-        public async Task<List<Walk>> GetAllAsync()
+        public async Task<List<Walk>> GetAllAsync(string? filterOn, string? filterQuery, string? sortBy, bool isAscending, int pageNumber, int pageSize)
         {
-            return await _walkRepository.GetAllAsync();
+            filterOn = filterOn?.ToString().Trim();
+            filterQuery = filterQuery?.ToString().Trim();
+            sortBy = sortBy?.ToString().Trim();
+            return await _walkRepository.GetAllAsync(filterOn, filterQuery, sortBy, isAscending, pageNumber, pageSize);
         }
         public async Task<Walk?> GetByIdAsync(Guid id)
         {
