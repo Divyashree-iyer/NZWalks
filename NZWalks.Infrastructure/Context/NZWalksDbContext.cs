@@ -1,16 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using NZWalks.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NZWalks.Infrastructure.Context
 {
     public class NZWalksDbContext: DbContext
     {
-        public NZWalksDbContext(DbContextOptions dbContextOptions) : base(dbContextOptions)
+        public NZWalksDbContext(DbContextOptions<NZWalksDbContext> dbContextOptions) : base(dbContextOptions)
         {
 
         }

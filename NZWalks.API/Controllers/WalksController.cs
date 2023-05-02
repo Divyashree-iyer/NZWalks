@@ -1,8 +1,6 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using NZWalks.API.CustomActionFilters;
-using NZWalks.Business.Implementations;
 using NZWalks.Business.Interfaces;
 using NZWalks.Domain.DTO;
 using NZWalks.Domain.Entities;
