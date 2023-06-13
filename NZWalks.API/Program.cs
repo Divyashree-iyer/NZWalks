@@ -4,15 +4,27 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using NZWalks.API.Middleware;
 using NZWalks.Business.Implementations;
 using NZWalks.Business.Interfaces;
 using NZWalks.Business.Mappings;
 using NZWalks.Infrastructure.Context;
 using NZWalks.Infrastructure.Repositories.Implementations;
 using NZWalks.Infrastructure.Repositories.Interfaces;
+using Serilog;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
+
+//Add Logging to Console
+var logger = new LoggerConfiguration()
+    .WriteTo.Console()
+    .WriteTo.File("Logs/NzWalks_log.txt", rollingInterval: RollingInterval.Minute)
+    .MinimumLevel.Error()
+    .CreateLogger();
+
+builder.Logging.ClearProviders();
+builder.Logging.AddSerilog(logger);
 
 // Add services to the container.
 builder.Services.AddControllers();
@@ -104,6 +116,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseMiddleware<ExceptionHandlerMiddleware>();
 
 app.UseHttpsRedirection();
 
